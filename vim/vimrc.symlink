@@ -1,4 +1,82 @@
+execute pathogen#infect()
+
 syntax on
 
 " Wrap gitcommit file types at the appropriate length
 filetype indent plugin on
+
+" Fonts and colors
+colorscheme molokai
+set guifont=Meslo_LG_S_Regular:h14
+if has('gui_running')
+  set guifont=Meslo_LG_S_Regular_for_Powerline:h14
+endif
+
+" Color column 80 as a guide for line length
+set colorcolumn=80
+
+"Enabling hybrid line numbers
+set relativenumber
+set number
+
+" Tabbing and indent
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set cindent
+set smartindent
+set autoindent
+
+" Ignore files by default (used by CommandT, YouCompleteMe, etc)
+set wildignore+=*.class,**/target/**,**/bin/**,_site/**
+
+" Hide gvim/macvims scrollbars and the Toolbar
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
+
+" Hide gvims menubar
+" on macvim the menu items are on the mac top menubar so we can't remove
+set guioptions-=m
+
+" Customise Search functions
+set incsearch  "highligh results as you search
+set ignorecase "lower case match either case
+set smartcase  "upper case only match upper case
+set hlsearch   "highlight all search results
+
+" NerdTree don't open on startup
+let g:nerdtree_tabs_open_on_gui_startup=0
+
+" Alias Q for q and W for w to fix the :Q not a command problems
+cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+
+" Airline settings
+set noshowmode
+set ttimeoutlen=10
+let g:airline_powerline_fonts=1
+let g:Powerline_symbols = 'fancy'
+set nocompatible
+set laststatus=2
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+
+" Indent lines plugin for indentation guides
+let g:indentLine_faster = 1
+let g:indentLine_char = '│'
+let g:indentLine_color_gui = '#333333'
+
+" YouCompleteMe pull in ctags to prompt
+let g:ycm_seed_identifiers_with_syntax = 1
+
+" Custom file types
+au BufNewFile,BufRead *.zsh set filetype=sh
+au BufNewFile,BufRead *.html set filetype=mustache
+
+" Custom button mappings
+"   open NerdTree
+nmap \e :NERDTreeToggle<CR>
+"   clears highlighted results
+nmap \q :nohlsearch<CR> 
