@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# A pretty graph showing commits and how they fork/merge
+#
+
+
+git log --graph --pretty=\"format:%C(yellow)%h%C(cyan)%d%Creset %s %C(green) %an, %ar%Creset\""
