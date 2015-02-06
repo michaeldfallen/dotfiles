@@ -44,6 +44,7 @@ brew cask install postgres
 brew cask install sequel-pro
 brew cask install tower
 brew cask install vagrant
+brew cask install virtualbox
 brew cask install coconutbattery
 brew cask install colors
 brew cask install gfxcardstatus
