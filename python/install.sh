@@ -1,1 +1,1 @@
-easy_install SpoofMAC
+pip3 install pep8
