@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+#
+# Create a new ssh key
+
+host=
+hostname=${HOSTNAME%.local}
+filename=
+filepath=
+user=git
+ssh_config="${HOME}/.ssh/config"
+
+usage() {
+  echo "Usage:"
+  echo "  $0 host [-u user (git)]"
+  echo "Options:"
+  echo "  host: a host or pattern to use this key for (github.com, *.git)"
+  echo "  -u user: the host user for this key (defaults to git)"
+}
+
+error() {
+  echo "Error:"
+  echo "  $1"
+  exit 1
+}
+
+gen_key() {
+  ssh-keygen -t rsa -b 2048 -f "$filepath" -C "${hostname} on ${host}"
+}
+
+host_line() {
+  echo "HOST $host"
+}
+
+config() {
+  echo "$(host_line)"
+  echo "  IdentityFile $filepath"
+  echo "  User $user"
+}
+
+gen_config() {
+  config_content="$(config)"
+  echo "$config_content" >> "$ssh_config"
+}
+
+check_input() {
+  host=$1; shift;
+  filename="${host}_rsa"
+  filepath="${HOME}/.ssh/${filename}"
+
+  if [[ -z $host ]]; then
+    usage
+    error "Provide a host url"
+  fi
+
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      -u) user="$2"; shift;;
+      -*) usage; error "Unrecognised argument $@";;
+      *)  break;
+    esac
+    shift
+  done
+
+  if [[ -f "$filepath" ]]; then
+    error "An ssh key for $host exists. Run rm ~/.ssh/$filename to delete it."
+  fi
+  if [[ -f "$ssh_config" && $(cat "$ssh_config" | grep "$(host_line)") ]]; then
+    error "An ssh config exists for $host"
+  fi
+}
+
+copy_to_clipboard() {
+  cat "${filepath}.pub" | pbcopy
+  echo "${filepath}.pub copied to your clipboard"
+}
+
+check_input $@
+gen_key
+gen_config
+copy_to_clipboard
