@@ -13,6 +13,8 @@ then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+# Install Xcode, needed for macvim
+xcode-select --install
 
 #------------------------
 # Taps
@@ -38,7 +40,7 @@ brew cask install lastpass
 brew cask install superduper
 brew cask install diffmerge
 brew cask install imageoptim
-brew cask install macvim
+brew cask install sublime-text
 brew cask install pgadmin3
 brew cask install postgres
 brew cask install sequel-pro
@@ -48,7 +50,7 @@ brew cask install virtualbox
 brew cask install coconutbattery
 brew cask install colors
 brew cask install gfxcardstatus
-brew cask install quickcast
+#brew cask install quickcast
 brew cask install spectacle
 brew cask install totalterminal
 brew cask install chromium
@@ -66,7 +68,8 @@ brew cask install spotify
 # Brew apps
 #------------------------
 
-brew install vim
+brew install macvim --override-system-vim
+brew install cmake
 brew install ack
 brew install apple-gcc42
 brew install autoconf
