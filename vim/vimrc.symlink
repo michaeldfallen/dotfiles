@@ -7,7 +7,6 @@ filetype indent plugin on
 
 " Fonts and colors
 colorscheme molokai
-set guifont=Meslo_LG_S_Regular:h14
 if has('gui_running')
   set guifont=Meslo_LG_S_Regular_for_Powerline:h14
 endif
