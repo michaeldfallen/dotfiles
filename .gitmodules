@@ -28,3 +28,12 @@
 [submodule "powerline-fonts"]
 	path = powerline-fonts
 	url = https://github.com/powerline/fonts
+[submodule "vim/vim.symlink/bundle/vim-snippets"]
+	path = vim/vim.symlink/bundle/vim-snippets
+	url = https://github.com/honza/vim-snippets
+[submodule "vim/vim.symlink/bundle/ultisnips"]
+	path = vim/vim.symlink/bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips
+[submodule "vim/vim.symlink/bundle/supertab"]
+	path = vim/vim.symlink/bundle/supertab
+	url = https://github.com/ervandew/supertab
