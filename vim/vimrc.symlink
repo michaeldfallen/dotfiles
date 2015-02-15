@@ -93,6 +93,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 
+" Syntastic checker settings
+let g:syntastic_python_checkers = ['flake8', 'python']
+
 " Custom file types
 au BufNewFile,BufRead *.zsh set filetype=sh
 au BufNewFile,BufRead *.html set filetype=mustache
