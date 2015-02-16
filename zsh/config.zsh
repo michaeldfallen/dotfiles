@@ -37,6 +37,9 @@ setopt HIST_REDUCE_BLANKS
 #   like: git comm-[tab]
 setopt complete_aliases
 
+# enables cd-ing via ~/Projects instead of cd ~/Projects
+setopt auto_cd
+
 # allow <TAB> and Arrow keys to move through the selection menu
 zstyle ':completion:*' menu select
 
