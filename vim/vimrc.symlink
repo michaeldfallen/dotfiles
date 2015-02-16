@@ -26,6 +26,9 @@ set cindent
 set smartindent
 set autoindent
 
+" Set the terminal title to the current document
+set title
+
 " Ignore files by default (used by CommandT, YouCompleteMe, etc)
 set wildignore+=*.class,**/target/**,**/bin/**,_site/**
 
