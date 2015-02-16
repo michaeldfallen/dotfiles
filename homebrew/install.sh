@@ -30,6 +30,7 @@ brew tap caskroom/versions
 # Cask Apps
 #------------------------
 
+brew cask install slack
 brew cask install caffeine
 brew cask install android-studio
 brew cask install alfred
