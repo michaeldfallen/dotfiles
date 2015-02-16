@@ -37,6 +37,9 @@ setopt HIST_REDUCE_BLANKS
 #   like: git comm-[tab]
 setopt complete_aliases
 
+# allow <TAB> and Arrow keys to move through the selection menu
+zstyle ':completion:*' menu select
+
 zle -N newtab
 
 bindkey '^[^[[D' backward-word
