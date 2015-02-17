@@ -1,70 +1,46 @@
 autoload colors && colors
-# cheers, @ehrenmurdick
-# http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
+source $DOTFILES/zsh/git-prompt/git-base.sh
 
-if (( $+commands[git] ))
-then
-  git="$commands[git]"
-else
-  git="/usr/bin/git"
-fi
+git_prompt () {
+  local=""
+  remote=""
+  local_ahead="$(commits_ahead_of_remote)"
+  local_behind="$(commits_behind_of_remote)"
+  remote_ahead="$(remote_ahead_of_master)"
+  remote_behind="$(remote_behind_of_master)"
 
-git_branch() {
-  echo $($git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
-}
+  ahead_arrow="%{$fg_bold[green]%}↑%{$reset_color%}"
+  behind_arrow="%{$fg_bold[red]%}↓%{$reset_color%}"
+  diverged_arrow="%{$fg_bold[yellow]%}⇵%{$reset_color%}"
+  behind_remote_arrow="%{$fg_bold[red]%}→%{$reset_color%}"
+  ahead_remote_arrow="%{$fg_bold[green]%}←%{$reset_color%}"
+  diverged_remote_arrow="%{$fg_bold[yellow]%}⇄%{$reset_color%}"
 
-git_dirty() {
-  if $(! $git status -s &> /dev/null)
-  then
-    echo ""
-  else
-    if [[ $($git status --porcelain) == "" ]]
-    then
-      echo "on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
-    else
-      echo "on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
-    fi
-  fi
-}
-
-git_prompt_info () {
- ref=$($git symbolic-ref HEAD 2>/dev/null) || return
-# echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
- echo "${ref#refs/heads/}"
-}
-
-unpushed () {
-  $git cherry -v @{upstream} 2>/dev/null
-}
-
-need_push () {
-  if [[ $(unpushed) == "" ]]
-  then
-    echo " "
-  else
-    echo " with %{$fg_bold[magenta]%}unpushed%{$reset_color%} "
-  fi
-}
-
-ruby_version() {
-  if (( $+commands[rbenv] ))
-  then
-    echo "$(rbenv version | awk '{print $1}')"
+  if [[ "$local_behind" -gt "0" && "$local_ahead" -gt "0" ]]; then
+    local=" $local_ahead$diverged_arrow$local_behind"
+  elif [[ "$local_behind" -gt "0" ]]; then
+    local=" $local_behind$behind_arrow"
+  elif [[ "$local_ahead" -gt "0" ]]; then
+    local=" $local_ahead$ahead_arrow"
   fi
 
-  if (( $+commands[rvm-prompt] ))
-  then
-    echo "$(rvm-prompt | awk '{print $1}')"
+  if [[ "$remote_behind" -gt "0" && "$remote_ahead" -gt "0" ]]; then
+    remote=" $remote_ahead$diverged_remote_arrow$remote_behind"
+  elif [[ "$remote_behind" -gt "0" ]]; then
+    remote=" $ahead_remote_arrow$remote_behind"
+  elif [[ "$remote_ahead" -gt "0" ]]; then
+    remote=" $remote_ahead$behind_remote_arrow"
   fi
-}
 
-rb_prompt() {
-  if ! [[ -z "$(ruby_version)" ]]
-  then
-    echo "%{$fg_bold[yellow]%}$(ruby_version)%{$reset_color%} "
-  else
-    echo ""
+  branch="%{$fg[white]%}$(branch_name)%{$reset_color%}"
+  git_prefix="%{$fg_bold[black]%}git:(%{$reset_color%}"
+  git_suffix="%{$fg_bold[black]%})%{$reset_color%}"
+
+  if is_repo; then
+    prompt=" $git_prefix$branch$local$git_suffix"
   fi
+
+  echo "$prompt"
 }
 
 directory_name() {
@@ -75,7 +51,7 @@ ret_status() {
   echo "%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
 }
 
-export PROMPT=$'$(ret_status)$(directory_name) $(git_dirty)$(need_push)'
+export PROMPT=$'$(ret_status)$(directory_name)$(git_prompt) '
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
 }

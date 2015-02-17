@@ -200,6 +200,10 @@
 	EA9OU0tleWVkQXJjaGl2ZXLRFxhUcm9vdIABCBEaIy0yNztBSFBdZGdpa3B7hIyPmKqt
 	sgAAAAAAAAEBAAAAAAAAABkAAAAAAAAAAAAAAAAAAAC0
 	</data>
+	<key>UseBoldFonts</key>
+	<false/>
+	<key>UseBrightBold</key>
+	<true/>
 	<key>WindowTitle</key>
 	<string></string>
 	<key>name</key>
