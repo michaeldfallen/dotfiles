@@ -2,6 +2,7 @@ autoload colors && colors
 source $DOTFILES/zsh/git-prompt/git-base.sh
 
 git_prompt () {
+  prompt_str=""
   local=""
   remote=""
   local_ahead="$(commits_ahead_of_remote)"
@@ -38,10 +39,10 @@ git_prompt () {
   git_suffix="%{$fg_bold[black]%})%{$reset_color%}"
 
   if is_repo; then
-    prompt=" $git_prefix$remote$branch$local$git_suffix"
+    prompt_str=" $git_prefix$remote$branch$local$git_suffix"
   fi
 
-  echo "$prompt"
+  echo "$prompt_str"
 }
 
 directory_name() {
