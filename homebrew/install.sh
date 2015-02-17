@@ -78,6 +78,7 @@ brew install autoconf
 brew install automake
 brew install gettext
 brew install intltool
+brew install nvm
 brew install node
 brew install python
 brew install python3
