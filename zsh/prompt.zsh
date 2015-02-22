@@ -35,27 +35,30 @@ git_prompt () {
   fi
 
   porcelain="$(porcelain_status)"
-  staged_changes="$(staged_status "$porcelain")"
-  unstaged_changes="$(unstaged_status "$porcelain")"
-  untracked_changes="$(untracked_status "$porcelain")"
-  conflicted_changes="$(conflicted_status "$porcelain")"
-  if [[ -n "$staged_changes" ]]; then
-    staged_changes=" $staged_changes"
+  if [[ -n "$porcelain" ]]; then
+    staged_changes="$(staged_status "$porcelain")"
+    unstaged_changes="$(unstaged_status "$porcelain")"
+    untracked_changes="$(untracked_status "$porcelain")"
+    conflicted_changes="$(conflicted_status "$porcelain")"
+    if [[ -n "$staged_changes" ]]; then
+      staged_changes=" $staged_changes"
+    fi
+
+    if [[ -n "$unstaged_changes" ]]; then
+      unstaged_changes=" $unstaged_changes"
+    fi
+
+    if [[ -n "$conflicted_changes" ]]; then
+      conflicted_changes=" $conflicted_changes"
+    fi
+
+    if [[ -n "$untracked_changes" ]]; then
+      untracked_changes=" $untracked_changes"
+    fi
+
+    changes="$staged_changes$conflicted_changes$unstaged_changes$untracked_changes"
   fi
 
-  if [[ -n "$unstaged_changes" ]]; then
-    unstaged_changes=" $unstaged_changes"
-  fi
-
-  if [[ -n "$conflicted_changes" ]]; then
-    conflicted_changes=" $conflicted_changes"
-  fi
-
-  if [[ -n "$untracked_changes" ]]; then
-    untracked_changes=" $untracked_changes"
-  fi
-
-  changes="$staged_changes$conflicted_changes$unstaged_changes$untracked_changes"
   branch="%{$fg[white]%}$(readable_branch_name)%{$reset_color%}"
   git_prefix="%{$fg_bold[black]%}git:(%{$reset_color%}"
   git_suffix="%{$fg_bold[black]%})%{$reset_color%}"
