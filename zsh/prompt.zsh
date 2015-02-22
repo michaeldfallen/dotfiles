@@ -1,6 +1,14 @@
 autoload colors && colors
 source $DOTFILES/zsh/git-prompt/git-base.sh
 
+local ahead_arrow="%{$fg_bold[green]%}↑%{$reset_color%}"
+local behind_arrow="%{$fg_bold[red]%}↓%{$reset_color%}"
+local diverged_arrow="%{$fg_bold[yellow]%}⇵%{$reset_color%}"
+local behind_remote_arrow="%{$fg_bold[red]%}→%{$reset_color%}"
+local ahead_remote_arrow="%{$fg_bold[green]%}←%{$reset_color%}"
+local diverged_remote_arrow="%{$fg_bold[yellow]%}⇄%{$reset_color%}"
+local remote_master="𝘮"
+
 git_prompt () {
   prompt_str=""
   local=""
@@ -9,14 +17,6 @@ git_prompt () {
   local_behind="$(commits_behind_of_remote)"
   remote_ahead="$(remote_ahead_of_master)"
   remote_behind="$(remote_behind_of_master)"
-  remote_master="𝘮"
-
-  ahead_arrow="%{$fg_bold[green]%}↑%{$reset_color%}"
-  behind_arrow="%{$fg_bold[red]%}↓%{$reset_color%}"
-  diverged_arrow="%{$fg_bold[yellow]%}⇵%{$reset_color%}"
-  behind_remote_arrow="%{$fg_bold[red]%}→%{$reset_color%}"
-  ahead_remote_arrow="%{$fg_bold[green]%}←%{$reset_color%}"
-  diverged_remote_arrow="%{$fg_bold[yellow]%}⇄%{$reset_color%}"
 
   if [[ "$local_behind" -gt "0" && "$local_ahead" -gt "0" ]]; then
     local=" $local_ahead$diverged_arrow$local_behind"
@@ -34,12 +34,34 @@ git_prompt () {
     remote="$remote_master $remote_ahead $behind_remote_arrow "
   fi
 
-  branch="%{$fg[white]%}$(branch_name)%{$reset_color%}"
+  porcelain="$(porcelain_status)"
+  staged_changes="$(staged_status "$porcelain")"
+  unstaged_changes="$(unstaged_status "$porcelain")"
+  untracked_changes="$(untracked_status "$porcelain")"
+  conflicted_changes="$(conflicted_status "$porcelain")"
+  if [[ -n "$staged_changes" ]]; then
+    staged_changes=" $staged_changes"
+  fi
+
+  if [[ -n "$unstaged_changes" ]]; then
+    unstaged_changes=" $unstaged_changes"
+  fi
+
+  if [[ -n "$conflicted_changes" ]]; then
+    conflicted_changes=" $conflicted_changes"
+  fi
+
+  if [[ -n "$untracked_changes" ]]; then
+    untracked_changes=" $untracked_changes"
+  fi
+
+  changes="$staged_changes$conflicted_changes$unstaged_changes$untracked_changes"
+  branch="%{$fg[white]%}$(readable_branch_name)%{$reset_color%}"
   git_prefix="%{$fg_bold[black]%}git:(%{$reset_color%}"
   git_suffix="%{$fg_bold[black]%})%{$reset_color%}"
 
   if is_repo; then
-    prompt_str=" $git_prefix$remote$branch$local$git_suffix"
+    prompt_str=" $git_prefix$remote$branch$local$git_suffix$changes"
   fi
 
   echo "$prompt_str"
