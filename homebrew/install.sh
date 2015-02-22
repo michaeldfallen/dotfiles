@@ -70,6 +70,7 @@ brew cask install spotify
 # Brew apps
 #------------------------
 
+brew install heroku-toolbelt
 brew install macvim --override-system-vim
 brew install cmake
 brew install ack
