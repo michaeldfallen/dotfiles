@@ -65,6 +65,9 @@ set encoding=utf-8
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 
+" Change the window split character
+set fillchars+=vert:\┃
+
 " Indent lines plugin for indentation guides
 let g:indentLine_faster = 1
 let g:indentLine_char = '│'
