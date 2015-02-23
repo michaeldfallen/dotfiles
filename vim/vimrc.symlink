@@ -68,6 +68,9 @@ set fillchars+=stl:\ ,stlnc:\
 " Change the window split character
 set fillchars+=vert:\┃
 
+" Show trailing spaces and tabs
+set list listchars=tab:»·,trail:·
+
 " Indent lines plugin for indentation guides
 let g:indentLine_faster = 1
 let g:indentLine_char = '│'
