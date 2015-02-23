@@ -27,11 +27,11 @@ git_prompt () {
   fi
 
   if [[ "$remote_behind" -gt "0" && "$remote_ahead" -gt "0" ]]; then
-    remote="$remote_master $remote_ahead $diverged_remote_arrow $remote_behind "
-  elif [[ "$remote_behind" -gt "0" ]]; then
-    remote="$remote_master $ahead_remote_arrow $remote_behind "
+    remote="$remote_master $remote_behind $diverged_remote_arrow $remote_ahead "
   elif [[ "$remote_ahead" -gt "0" ]]; then
-    remote="$remote_master $remote_ahead $behind_remote_arrow "
+    remote="$remote_master $ahead_remote_arrow $remote_ahead "
+  elif [[ "$remote_behind" -gt "0" ]]; then
+    remote="$remote_master $remote_behind $behind_remote_arrow "
   fi
 
   porcelain="$(porcelain_status)"
