@@ -15,10 +15,11 @@ git_prompt () {
   prompt_str=""
   local=""
   remote=""
-  local_ahead="$(commits_ahead_of_remote)"
-  local_behind="$(commits_behind_of_remote)"
-  remote_ahead="$(remote_ahead_of_master)"
-  remote_behind="$(remote_behind_of_master)"
+  remote_branch="$(remote_branch_name)"
+  local_ahead="$(commits_ahead_of_remote "$remote_branch" )"
+  local_behind="$(commits_behind_of_remote "$remote_branch")"
+  remote_ahead="$(remote_ahead_of_master "$remote_branch")"
+  remote_behind="$(remote_behind_of_master "$remote_branch")"
 
   if [[ "$local_behind" -gt "0" && "$local_ahead" -gt "0" ]]; then
     local=" $local_ahead$diverged_arrow$local_behind"
