@@ -10,7 +10,7 @@ local diverged_remote_arrow="%{$fg_bold[yellow]%}⇄%{$reset_color%}"
 local remote_master="𝘮"
 
 git_prompt () {
-  fetch_async
+  nohup $DOTFILES/zsh/git-prompt/fetch.sh >/dev/null &
 
   prompt_str=""
   local=""
