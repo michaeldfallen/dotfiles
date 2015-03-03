@@ -81,6 +81,7 @@ brew install gettext
 brew install intltool
 brew install nvm
 brew install node
+brew install autoenv
 brew install python
 brew install python3
 brew install chruby
