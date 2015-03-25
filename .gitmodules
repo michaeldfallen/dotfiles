@@ -52,3 +52,6 @@
 [submodule "vim/vim.symlink/bundle/fugitive"]
 	path = vim/vim.symlink/bundle/fugitive
 	url = https://github.com/tpope/vim-fugitive
+[submodule "vim/vim.symlink/bundle/nerdtree-git-plugin"]
+	path = vim/vim.symlink/bundle/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin
