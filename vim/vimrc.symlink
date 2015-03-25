@@ -105,15 +105,19 @@ let g:syntastic_check_on_wq = 1
 " Syntastic checker settings
 let g:syntastic_python_checkers = ['flake8', 'python']
 
+let g:syntastic_filetype_map = { 'html.mustache': 'mustache' }
+
 " Ack.vim aliases, death to mixed caps
 cnoreabbrev <expr> ack ((getcmdtype() is# ':' && getcmdline() is# 'ack')?('Ack'):('ack'))
 
 " Custom file types
 au BufNewFile,BufRead *.zsh set filetype=sh
-au BufNewFile,BufRead *.html set filetype=mustache
 
 " Custom button mappings
 "   open NerdTree
 nmap \e :NERDTreeToggle<CR>
 "   clears highlighted results
 nmap \q :nohlsearch<CR>
+
+" Vim-markdowns folding is not useful
+let g:vim_markdown_folding_disabled=1
