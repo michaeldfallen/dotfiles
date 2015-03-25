@@ -119,5 +119,13 @@ nmap \e :NERDTreeToggle<CR>
 "   clears highlighted results
 nmap \q :nohlsearch<CR>
 
+" GitV custom commands
+let g:Gitv_OpenHorizontal = 1
+" Prevent folding in gitv dialogs
+augroup git
+  au!
+  autocmd FileType git :setlocal foldlevel=99
+augroup END
+
 " Vim-markdowns folding is not useful
 let g:vim_markdown_folding_disabled=1
