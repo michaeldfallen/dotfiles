@@ -22,7 +22,7 @@ git_prompt () {
   remote_behind="$(remote_behind_of_master "$remote_branch")"
 
   if [[ "$local_behind" -gt "0" && "$local_ahead" -gt "0" ]]; then
-    local=" $local_ahead$diverged_arrow$local_behind"
+    local=" $local_behind$diverged_arrow$local_ahead"
   elif [[ "$local_behind" -gt "0" ]]; then
     local=" $local_behind$behind_arrow"
   elif [[ "$local_ahead" -gt "0" ]]; then
