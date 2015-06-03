@@ -1,3 +1,4 @@
+pip3 install rope
 pip3 install pep8
 pip3 install flake8
 pip3 install virtualenv

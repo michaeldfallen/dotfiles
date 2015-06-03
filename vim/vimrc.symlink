@@ -1,6 +1,7 @@
 execute pathogen#infect()
 
 syntax on
+let python_highlight_all = 1
 
 " Wrap gitcommit file types at the appropriate length
 filetype indent plugin on
@@ -85,6 +86,9 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
+" YouCompleteMe \+g to jump to declaration
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
@@ -110,6 +114,10 @@ let g:syntastic_python_checkers = ['flake8', 'python']
 
 let g:syntastic_filetype_map = { 'html.mustache': 'mustache' }
 
+let g:syntastic_sass_sass_args = '--load-path "~/Projects/land-registry/govuk_frontend_toolkit/stylesheets"'
+
+au BufRead,BufNewFile */puppet/manifests/init.pp let b:syntastic_puppet_puppetlint_args = '--no-autoloader_layout-check' 
+
 " Ack.vim aliases, death to mixed caps
 cnoreabbrev <expr> ack ((getcmdtype() is# ':' && getcmdline() is# 'ack')?('Ack'):('ack'))
 
@@ -121,6 +129,11 @@ au BufNewFile,BufRead *.zsh set filetype=sh
 nmap \e :NERDTreeToggle<CR>
 "   clears highlighted results
 nmap \q :nohlsearch<CR>
+
+" NERD_tree config
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$', '__pycache__']
+let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 
 " GitV custom commands
 let g:Gitv_OpenHorizontal = 1
@@ -142,3 +155,6 @@ noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
+
+" Map <Leader>+o (for outline) to open tagbar
+nmap \o :TagbarToggle<CR>
