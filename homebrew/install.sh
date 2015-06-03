@@ -47,6 +47,9 @@ brew cask install pgadmin3
 brew cask install postgres
 brew cask install sequel-pro
 brew cask install tower
+brew cask install hiera
+brew cask install facter
+brew cask install puppet
 brew cask install vagrant
 brew cask install virtualbox
 brew cask install coconutbattery
@@ -70,6 +73,7 @@ brew cask install spotify
 # Brew apps
 #------------------------
 
+brew install ctags-exuberant
 brew install heroku-toolbelt
 brew install macvim --override-system-vim
 brew install cmake
