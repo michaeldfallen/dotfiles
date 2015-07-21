@@ -119,11 +119,15 @@ let g:syntastic_check_on_wq = 1
 " Syntastic checker settings
 let g:syntastic_python_checkers = ['flake8', 'python']
 
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+
 let g:syntastic_filetype_map = { 'html.mustache': 'mustache' }
 
 let g:syntastic_sass_sass_args = '--load-path "~/Projects/land-registry/govuk_frontend_toolkit/stylesheets"'
 
-au BufRead,BufNewFile */puppet/manifests/init.pp let b:syntastic_puppet_puppetlint_args = '--no-autoloader_layout-check' 
+au BufRead,BufNewFile */puppet/manifests/init.pp let b:syntastic_puppet_puppetlint_args = '--no-autoloader_layout-check'
+au BufRead,BufNewFile */Puppetfile let b:syntastic_ruby_rubocop_args = '--except Style/FileName'
+au BufRead,BufNewFile */puppet/*.erb let b:syntastic_eruby_ruby_quiet_messages = { 'regex': 'possibly useless use of a variable in void context' }
 
 " Ack.vim aliases, death to mixed caps
 cnoreabbrev <expr> ack ((getcmdtype() is# ':' && getcmdline() is# 'ack')?('Ack'):('ack'))
