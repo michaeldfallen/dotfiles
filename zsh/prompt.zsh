@@ -45,33 +45,8 @@ git_prompt () {
       remote="upstream $not_upstream "
     fi
 
-    porcelain="$(porcelain_status)"
-    if [[ -n "$porcelain" ]]; then
-      staged_changes="$(staged_status "$porcelain")"
-      unstaged_changes="$(unstaged_status "$porcelain")"
-      untracked_changes="$(untracked_status "$porcelain")"
-      conflicted_changes="$(conflicted_status "$porcelain")"
-      if [[ -n "$staged_changes" ]]; then
-        staged_changes=" $staged_changes"
-      fi
-
-      if [[ -n "$unstaged_changes" ]]; then
-        unstaged_changes=" $unstaged_changes"
-      fi
-
-      if [[ -n "$conflicted_changes" ]]; then
-        conflicted_changes=" $conflicted_changes"
-      fi
-
-      if [[ -n "$untracked_changes" ]]; then
-        untracked_changes=" $untracked_changes"
-      fi
-
-      changes="$staged_changes$conflicted_changes$unstaged_changes$untracked_changes"
-    fi
-
     branch="%{$fg[white]%}$(readable_branch_name)%{$reset_color%}"
-    prompt_str=" $git_prefix$remote$branch$local$git_suffix$changes"
+    prompt_str=" $git_prefix$remote$branch$local$git_suffix$(zsh_color_changes_status)"
   fi
 
   echo "$prompt_str"
@@ -91,6 +66,10 @@ set_prompt () {
 }
 
 precmd() {
-  title "zsh" "%m" "%55<...<%~"
+  title "zsh" "%m" "${PWD##*/}"
   set_prompt
+}
+
+preexec() {
+  title "zsh" "%m" "${PWD##*/} - $2"
 }
