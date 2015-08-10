@@ -21,6 +21,9 @@ git_prompt () {
   if is_repo; then
 
     if remote_branch="$(remote_branch_name)"; then
+      remote_ahead="$(remote_ahead_of_master "$remote_branch")"
+      remote_behind="$(remote_behind_of_master "$remote_branch")"
+
       if [[ "$remote_behind" -gt "0" && "$remote_ahead" -gt "0" ]]; then
         remote="$remote_master $remote_behind $diverged_remote_arrow $remote_ahead "
       elif [[ "$remote_ahead" -gt "0" ]]; then
