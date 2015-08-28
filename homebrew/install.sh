@@ -106,9 +106,11 @@ brew install wget
 brew install hub
 
 #------------------------
-# 
+# Install my apps
 #------------------------
 
+brew install michaeldfallen/formula/butler
+brew install michaeldfallen/formula/git-radar
 
 
 exit 0
