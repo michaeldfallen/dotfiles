@@ -103,6 +103,7 @@ brew install jpeg
 brew install terminal-notifier
 brew install tree
 brew install wget
+brew install hub
 
 #------------------------
 # 
