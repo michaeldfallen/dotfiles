@@ -104,6 +104,16 @@ brew install terminal-notifier
 brew install tree
 brew install wget
 brew install hub
+brew install docker
+brew install docker-machine
+
+#------------------------
+# Install java (reluctantly)
+#------------------------
+
+brew cask install java7
+brew cask install java
+brew install maven
 
 #------------------------
 # Install my apps
