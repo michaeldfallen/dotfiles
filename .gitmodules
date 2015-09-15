@@ -70,3 +70,6 @@
 [submodule "vim/vim.symlink/bundle/vim-librarian"]
 	path = vim/vim.symlink/bundle/vim-librarian
 	url = https://github.com/hron84/vim-librarian
+[submodule "vim/vim.symlink/bundle/terraform"]
+	path = vim/vim.symlink/bundle/terraform
+	url = https://github.com/markcornick/vim-terraform
