@@ -40,9 +40,6 @@
 [submodule "vim/vim.symlink/bundle/ack.vim"]
 	path = vim/vim.symlink/bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim
-[submodule "zsh/git-prompt"]
-	path = zsh/git-prompt
-	url = https://github.com/michaeldfallen/git-prompt
 [submodule "vim/vim.symlink/bundle/indentLine"]
 	path = vim/vim.symlink/bundle/indentLine
 	url = https://github.com/Yggdroot/indentLine
