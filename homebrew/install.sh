@@ -68,6 +68,7 @@ brew cask install evernote
 brew cask install mou
 brew cask install skype
 brew cask install spotify
+brew cask install intellij-idea-ce
 
 #------------------------
 # Brew apps
